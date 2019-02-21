@@ -1,0 +1,23 @@
+body {
+  width: 50%;
+  margin: auto;
+  background-color: white;
+}
+
+h1 {
+  font-family: 'Open Sans';
+  text-align: center;
+}
+
+div {
+  margin: auto;
+  width: 50%;
+}
+
+#beer {
+  color: blue;
+}
+
+#city {
+  color: yellow;
+}
