@@ -1,7 +1,7 @@
 <?php
-$servername = "bvx.wtr.mybluehost.me";
+$servername = "beercitymaps.com";
 $username = "bvxwtrmy_bcmUser";
-$password = 'shitty';
+$password = "}`t~L/x46w\f5y2j";
 $db = "bvxwtrmy_bcm_0.1";
 
 // Connect to database
