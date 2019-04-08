@@ -1,51 +1,148 @@
 <?php
-// Change this to your connection info.
-$DB_HOST = 'localhost';
-$DB_USER = 'bvxwtrmy_bcmUser';
-$DB_PASS = 'shitty';
-$DB_NAME = 'bvxwtrmy_bcm_0.1';
-// Try and connect using the info above.
-$mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
-if ($mysqli->connect_errno) {
-  // If there is an error with the connection, stop the script and display the error.
-  die ('Failed to connect to MySQL: ' . $mysqli->connect_errno);
-}
-// Now we check if the data was submitted, isset will check if the data exists.
-if (!isset($_POST['username'], $_POST['password'], $_POST['email'])) {
-  // Could not get the data that should have been sent.
-  die ('Please complete the registration form!<br><a href="register.html">Back</a>');
-}
-// Make sure the submitted registration values are not empty.
-if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
-  // One or more values are empty...
-  die ('Please complete the registration form!<br><a href="register.html">Back</a>');
-}
-// We need to check if the account with that username exists
-  echo "test";
-if ($stmt = $mysqli->prepare('SELECT id, password FROM users WHERE username = ?')) {
-  // Bind parameters (s = string, i = int, b = blob, etc), hash the password using the PHP password_hash function.
-  $stmt->bind_param('s', $_POST['username']);
-  $stmt->execute(); 
-  $stmt->store_result(); 
-  // Store the result so we can check if the account exists in the database.
-  if ($stmt->num_rows > 0) {
-    // Username already exists
-    echo 'Username exists, please choose another!<br><a href="register.html">Back</a>';
-  } else {
-    // Username doesnt exists, insert new account
-    if ($stmt = $mysqli->prepare('INSERT INTO users (username, password, email) VALUES (?, ?, ?)')) {
-      // We do not want to expose passwords in our database, so hash the password and use password_verify when a user logs in.
-      $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-      $stmt->bind_param('sss', $_POST['username'], $password, $_POST['email']);
-      $stmt->execute();
-      echo 'You have successfully registered, you can now login!<br><a href="index.html">Login</a>';
-    } else {
-      echo '1Could not prepare statement!';
+// core configuration
+include_once 'config/core.php';
+ 
+// set page title
+$page_title = 'Register';
+ 
+// include login checker
+include_once 'login_checker.php';
+ 
+// include classes
+include_once 'config/database.php';
+include_once 'objects/user.php';
+include_once 'libs/php/utils.php';
+ 
+// include page header HTML
+include_once 'layout_head.php';
+ 
+echo "<div class='col-md-12'>";
+ 
+    // if form was posted
+if($_POST){
+ 
+    // get database connection
+    $database = new Database();
+    $db = $database->getConnection();
+ 
+    // initialize objects
+    $user = new User($db);
+    $utils = new Utils();
+ 
+    // set user email to detect if it already exists
+    $user->email=$_POST['email'];
+ 
+    // check if email already exists
+    if($user->emailExists()){
+        echo "<div class='alert alert-danger'>";
+            echo "The email you specified is already registered. Please try again or <a href='{$home_url}login'>login.</a>";
+        echo "</div>";
+    }else{
+      // set values to object properties
+      $user->firstname=$_POST['firstname'];
+      $user->lastname=$_POST['lastname'];
+      $user->contact_number=$_POST['contact_number'];
+      $user->address=$_POST['address'];
+      $user->city=$_POST['city'];
+      $user->password=$_POST['password'];
+      $user->access_level='Customer';
+      $user->status=0;
+
+      // access code for email verification
+      $access_code=$utils->getToken();
+      $user->access_code=$access_code;
+       
+// create the user
+if($user->create()){
+ 
+    // send confimation email
+    $send_to_email=$_POST['email'];
+    $body="Hi {$send_to_email}.<br /><br />";
+    $body.="Please click the following link to verify your email and login: {$home_url}verify.php/?access_code={$access_code}";
+    $subject="Verification Email";
+ 
+    if($utils->sendEmailViaPhpMail($send_to_email, $subject, $body)){
+        echo "<div class='alert alert-success'>
+            Verification link was sent to your email. Click that link to login.
+        </div>";
+    }else{
+        echo "<div class='alert alert-danger'>
+            User was created but unable to send verification email. Please contact admin.
+        </div>";
     }
-  }
-  $stmt->close();
-} else {
-  echo '2Could not prepare statement!';
+ 
+    // empty posted values
+    $_POST=array();
+ 
+}else{
+    echo "<div class='alert alert-danger' role='alert'>Unable to register. Please try again.</div>";
 }
-$mysqli->close();
+    }
+}
+?>
+<form action='register.php' method='post' id='register'>
+     <table class='table table-responsive'>
+         <tr>
+            <td class='width-30-percent'>Firstname</td>
+            <td><input type='text' name='firstname' class='form-control' required value="<?php echo isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname'], ENT_QUOTES) : "";  ?>" /></td>
+        </tr>
+         <tr>
+            <td>Lastname</td>
+            <td><input type='text' name='lastname' class='form-control' required value="<?php echo isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname'], ENT_QUOTES) : "";  ?>" /></td>
+        </tr>
+ 
+        <tr>
+            <td>Contact Number</td>
+            <td><input type='text' name='contact_number' class='form-control' required value="<?php echo isset($_POST['contact_number']) ? htmlspecialchars($_POST['contact_number'], ENT_QUOTES) : "";  ?>" /></td>
+        </tr>
+ 
+        <tr>
+            <td>Address</td>
+            <td><input type="text" name='address' class='form-control' required><?php echo isset($_POST['address']) ? htmlspecialchars($_POST['address'], ENT_QUOTES) : "";  ?></text></td>
+        </tr>
+
+        <!-- CITY STATE ZIP -->
+
+        <tr>
+          <td>City</td>
+          <td><input type="text" name="city" class="form-control" tabindex=-1 required value="<?php echo isset($_POST['city']) ? htmlspecialchars($_POST['city'], ENT_QUOTES) : "";  ?>" /></td>
+        </tr>
+
+        <tr>
+          <td>State</td>
+          <td><input type="text" name="state" class="form-control" tabindex=-1 required value="<?php echo isset($_POST['state']) ? htmlspecialchars($_POST['state'], ENT_QUOTES) : "";  ?>" /></td>
+        </tr>
+        <tr>
+          <td>Zipcode</td>
+          <td><input type="text" name="zipcode" id="zipcode" class="form-control" required value="<?php echo isset($_POST['city']) ? htmlspecialchars($_POST['zipcode'], ENT_QUOTES) : "";  ?>" /></td>
+        </tr>
+
+        <!-- END CITY STATE ZIP -->
+
+        <tr>
+            <td>Email</td>
+            <td><input type='email' name='email' class='form-control' required value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES) : "";  ?>" /></td>
+        </tr>
+ 
+        <tr>
+            <td>Password</td>
+            <td><input type='password' name='password' class='form-control' required id='passwordInput'></td>
+        </tr>
+ 
+        <tr>
+            <td></td>
+            <td>
+                <button type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus"></span> Register
+                </button>
+            </td>
+        </tr>
+    </table>
+</form>
+<?php
+ 
+echo "</div>";
+ 
+// include page footer HTML
+include_once "layout_foot.php";
 ?>
