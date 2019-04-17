@@ -1,19 +1,17 @@
 <?php
 // core configuration
 include_once "config/core.php";
- 
+
 // set page title
 $page_title="Map";
- 
+
 // include login checker
-$require_login=true;
+$require_login=false;
 include_once "login_checker.php";
- 
+
 // include page header HTML
 include_once 'layout_head.php';
- 
-echo "<div class='col-md-12'>";
- 
+
 ?>
 
 
@@ -24,7 +22,7 @@ echo "<div class='col-md-12'>";
       var map, infoWindow;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
+          center: {lat: 0, lng: 0},
           zoom: 15
         });
         infoWindow = new google.maps.InfoWindow;

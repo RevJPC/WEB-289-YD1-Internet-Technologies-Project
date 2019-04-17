@@ -58,7 +58,7 @@ if($user->create()){
     // send confimation email
     $send_to_email=$_POST['email'];
     $body="Hi {$send_to_email}.<br /><br />";
-    $body.="Please click the following link to verify your email and login: {$home_url}verify.php/?access_code={$access_code}";
+    $body.="Please click the following link to verify your email and login: {$home_url}verify.php/?access_code={$access_code}<br>";
     $subject="Verification Email";
  
     if($utils->sendEmailViaPhpMail($send_to_email, $subject, $body)){
@@ -83,11 +83,11 @@ if($user->create()){
 <form action='register.php' method='post' id='register'>
      <table class='table table-responsive'>
          <tr>
-            <td class='width-30-percent'>Firstname</td>
+            <td class='width-30-percent'>First Name</td>
             <td><input type='text' name='firstname' class='form-control' required value="<?php echo isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname'], ENT_QUOTES) : "";  ?>" /></td>
         </tr>
          <tr>
-            <td>Lastname</td>
+            <td>Last Name</td>
             <td><input type='text' name='lastname' class='form-control' required value="<?php echo isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname'], ENT_QUOTES) : "";  ?>" /></td>
         </tr>
  
@@ -105,15 +105,15 @@ if($user->create()){
 
         <tr>
           <td>City</td>
-          <td><input type="text" name="city" class="form-control" tabindex=-1 required value="<?php echo isset($_POST['city']) ? htmlspecialchars($_POST['city'], ENT_QUOTES) : "";  ?>" /></td>
+          <td><input type="text" id="city" name="city" class="form-control" tabindex=-1 value="City will automaticlly populate from Zip Code" required value="<?php echo isset($_POST['city']) ? htmlspecialchars($_POST['city'], ENT_QUOTES) : "";  ?>" /></td>
         </tr>
 
         <tr>
           <td>State</td>
-          <td><input type="text" name="state" class="form-control" tabindex=-1 required value="<?php echo isset($_POST['state']) ? htmlspecialchars($_POST['state'], ENT_QUOTES) : "";  ?>" /></td>
+          <td><input type="text" name="state" id="state" class="form-control" tabindex=-1 value="State will automaticlly populate from Zip Code" required value="<?php echo isset($_POST['state']) ? htmlspecialchars($_POST['state'], ENT_QUOTES) : "";  ?>" /></td>
         </tr>
         <tr>
-          <td>Zipcode</td>
+          <td>Zip Code</td>
           <td><input type="text" name="zipcode" id="zipcode" class="form-control" required value="<?php echo isset($_POST['city']) ? htmlspecialchars($_POST['zipcode'], ENT_QUOTES) : "";  ?>" /></td>
         </tr>
 

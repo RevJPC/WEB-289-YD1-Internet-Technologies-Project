@@ -61,8 +61,7 @@ div#blueimp-gallery div.modal{ overflow: visible; }
 }
 
 .profile-img{
-  width: 96px;
-  height: 96px;
+  width: 150px;
   margin: 0 auto 10px;
   display: block;
   -moz-border-radius: 50%;
@@ -103,4 +102,17 @@ div#blueimp-gallery div.modal{ overflow: visible; }
 
 .sm-logo {
   height: 75px;
+}
+
+#city, #state {
+  opacity: .2;
+}
+
+footer {
+  border: 1px solid black;
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  height: 70px;
 }

@@ -64,7 +64,7 @@ console.log(container);
 }
 
 // maps
-function mapsAPI(){
+function amapsAPI(){
   console.log("stuff");
 
       var map, infoWindow;

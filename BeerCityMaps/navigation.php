@@ -20,7 +20,7 @@
                     <a href="<?php echo $map_url; ?>">Map</a>
                 </li>
                <li <?php echo $page_title=="Breweries" ? "class='active'" : ""; ?>>
-                    <a href="<?php echo $breweries; ?>">Breweries</a>
+                    <a href="<?php echo $breweries_url; ?>">Breweries</a>
                 </li>
             </ul>
  

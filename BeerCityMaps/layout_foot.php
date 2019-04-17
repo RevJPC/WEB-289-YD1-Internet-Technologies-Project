@@ -1,4 +1,11 @@
     </div>
+
+<footer>
+
+
+</footer>
+
+
     <!-- /container -->
  
 <!-- jQuery library -->

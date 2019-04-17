@@ -78,34 +78,32 @@ else if($action=='please_login'){
 // tell the user email is verified
 else if($action=='email_verified'){
     echo "<div class='alert alert-success'>
-        <strong>Your email address have been validated.</strong>
+        <strong>Your email address has been validated.</strong>
     </div>";
 }
  
 // tell the user if access denied
 if($access_denied){
-    echo "<div class='alert alert-danger margin-top-40' role='alert'>
-        Access Denied.<br /><br />
-        Your username or password maybe incorrect
-    </div>";
+    echo "<div class='alert alert-danger margin-top-40' role='alert'>Access Denied.<br /><br />Your username or password maybe incorrect</div>";
 }
     // actual HTML login form
-    echo "<div class='account-wall'>";
-        echo "<div id='my-tab-content' class='tab-content'>";
-            echo "<div class='tab-pane active' id='login'>";
-                echo "<img class='profile-img' src='images/login-icon.png'>";
-                echo "<form class='form-signin' action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "' method='post'>";
-                    echo "<input type='text' name='email' class='form-control' placeholder='Email' required autofocus />";
-                    echo "<input type='password' name='password' class='form-control' placeholder='Password' required />";
-                    echo "<input type='submit' class='btn btn-lg btn-primary btn-block' value='Log In' />";
-                    echo "<div class='margin-1em-zero text-align-center'><a href='{$home_url}forgot_password.php'>Forgot password?</a></div>";
-                echo "</form>";
-            echo "</div>";
-        echo "</div>";
-    echo "</div>";
- 
-echo "</div>";
+    echo "<div class='account-wall'>
+         <div id='my-tab-content' class='tab-content'>
+            <div class='tab-pane active' id='login'>
+                <img class='profile-img' src='images/bcm-dropplet.jpg'>
+                <form class='form-signin' action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "' method='post'>
+
+                  <input type='text' name='email' class='form-control' placeholder='Email' value='' required autofocus />
+
+                  <input type='password' name='password' class='form-control' placeholder='Password' required />
+                    <input type='submit' class='btn btn-lg btn-primary btn-block' value='Log In' />
+                    <div class='margin-1em-zero text-align-center'><a href='{$home_url}forgot_password.php'>Forgot password?</a></div>
+                </form>
+              </div>
+            </div>
+          </div>
+          </div>";
  
 // footer HTML and JavaScript codes
-include_once "layout_foot.php";
+include_once 'layout_foot.php';
 ?>

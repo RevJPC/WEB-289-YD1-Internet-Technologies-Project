@@ -18,7 +18,7 @@ $home_url="http://localhost/";
 $map_url="http://localhost/map.php";
 
 // breweries page url
-$map_url="http://localhost/breweries.php";
+$breweries_url="http://localhost/breweries.php";
 
 // maps api key
 $mapsAPI="AIzaSyA1KmJlsO5vJW0qXlKG1isCIKJqFHQ-ysw";

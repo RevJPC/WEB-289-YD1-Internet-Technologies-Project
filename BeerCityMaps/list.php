@@ -3,7 +3,7 @@
 include_once "config/core.php";
  
 // set page title
-$page_title="Index";
+$page_title="list";
  
 // include login checker
 $require_login=true;
