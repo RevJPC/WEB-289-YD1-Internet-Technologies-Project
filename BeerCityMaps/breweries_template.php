@@ -29,10 +29,9 @@ if($num>0){
 
   echo "</table>";
 
-  $page_url="read_breweries.php?";
+  $page_url="breweries_template.php?";
   $total_rows = $user->countAll();
 
-  include_once 'admin/paging.php';
 }
 
 else{

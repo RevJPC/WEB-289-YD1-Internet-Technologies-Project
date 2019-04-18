@@ -32,11 +32,8 @@ echo "<div class='col-md-12'>";
     }
  
     // content once logged in
-    echo "<div class='alert alert-info'>";
-        echo "This is where information will be";
-    echo "</div>";
+    include_once "map.php";
  
-echo "</div>";
  
 // footer HTML and JavaScript codes
 include 'layout_foot.php';

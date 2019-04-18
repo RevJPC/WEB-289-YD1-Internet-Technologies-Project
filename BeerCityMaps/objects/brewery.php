@@ -27,7 +27,7 @@ class Brewery{
     public function __construct($db){
         $this->conn = $db;
     }
-// create new user record
+// create new brewery record
 function create(){
  
     // to get time stamp for 'created' field
@@ -102,10 +102,10 @@ public function showError($stmt){
         print_r($stmt->errorInfo());
     echo "</pre>";
 }
-// read all user records
+// read all brewery records
 function readAll($from_record_num, $records_per_page){
  
-    // query to read all user records, with limit clause for pagination
+    // query to read all brewery records, with limit clause for pagination
     $query = "SELECT
                 id,
                 name,
@@ -140,10 +140,10 @@ function readAll($from_record_num, $records_per_page){
     // return values
     return $stmt;
 }
-// used for paging users
+// used for paging brewerys
 public function countAll(){
  
-    // query to select all user records
+    // query to select all brewery records
     $query = "SELECT id FROM " . $this->table_name . "";
  
     // prepare query statement

@@ -5,13 +5,8 @@ include_once "config/core.php";
 $page_title="Map";
  
 // include login checker
-$require_login=true;
 include_once "login_checker.php";
-
-// include classes
-include_once 'config/database.php';
-include_once 'objects/brewery.php';
-
+ 
 // include page header HTML
 include_once 'layout_head.php';
 echo "<div class='col-md-12'>";
@@ -93,29 +88,53 @@ echo "<div class='col-md-12'>";
           handleLocationError(false, infoWindow, map.getCenter());
         }
 
+
+
+
+
+// move this to pdo database object
+
+
+
+
 // pull brewery information from the database
-
 <?php
+        $username="bvxwtrmy_bcmUser";
+        $password="password";
+        $host="localhost";
+        $db_name="bvxwtrmy_bcm_0.2";
 
-// get database connection
-$database = new Database();
-$db = $database->getConnection();
+        $conn=new mysqli($host,$username,$password) or die(mysql_error());
+        mysqli_select_db($conn, $db_name) or die(mysqli_error());
 
-// initialize objects
-$user = new Brewery($db);
+$query = mysqli_query($conn, "SELECT * FROM breweries")or die(mysqli_error($conn));
+while($row = mysqli_fetch_array($query))
+{
+  $name = $row['name'];
+  $lat = $row['lat'];
+  $lng = $row['lng'];
+  $ad_text = $row['ad_text'];
+  $link = $row['link'];
 
-// read all breweries from the database
-$stmt = $user->readAll($from_record_num, $records_per_page);
 
-// count retrieved breweries
-$num = $stmt->rowCount();
 
-// loop through the brewery records
-  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-    extract($row);
-    echo("addMarker({$lat}, {$lng}, '<b>{$name}</b><br>{$ad_text}<br><a href={$link}>{$link}</a>');\n");
-  }
+  echo("addMarker($lat, $lng, '<b>$name</b><br>$ad_text<br><a href=$link>$link</a>');\n");
+
+}
+
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
 
  center = bounds.getCenter();
      map.fitBounds(bounds);
@@ -126,5 +145,5 @@ $num = $stmt->rowCount();
      <body onload="initMap()" style="margin:0px; border:0px; padding:0px;">
      </body>
 
-<?php echo "</div></div>";
+<?php echo "</div>";
 include_once "layout_foot.php"; ?>

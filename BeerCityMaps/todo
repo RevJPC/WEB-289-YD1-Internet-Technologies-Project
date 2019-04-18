@@ -2,25 +2,28 @@
 
 FUCK YEAH!!!  zipcodeapi DONE!
 
-
-
-
 ***beer city maps TO DO LIST 4/2/2019***
 
 ^database for brewery information
-
 
 **beer city maps TO DO LIST 4/4/2019***
 
 page to display brewery information
 
-upload images
-display images
-
-
-map lat and lng from database
+DONE upload images
+DONE display images
+DONE map lat and lng from database
 
 
 **BeerCityMaps todo list 4/17/2019**
+
+CHECK! combine geolocation with database markers
+CHECK!  Use database connection object rather than procedural 
+
+
+**BeerCityMaps todo list 4/17/2019**
+
+Sticky fields for login name if in the database
+
 
 Footer to match header style links to social media

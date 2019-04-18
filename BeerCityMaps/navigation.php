@@ -19,14 +19,13 @@
                 <li <?php echo $page_title=="Map" ? "class='active'" : ""; ?>>
                     <a href="<?php echo $map_url; ?>">Map</a>
                 </li>
-               <li <?php echo $page_title=="Breweries" ? "class='active'" : ""; ?>>
-                    <a href="<?php echo $breweries_url; ?>">Breweries</a>
+               <li <?php echo $page_title=="List" ? "class='active'" : ""; ?>>
+                    <a href="<?php echo $list_url; ?>">List</a>
                 </li>
             </ul>
  
             <?php
             // check if users / customer was logged in
-            // if user was logged in, show "Edit Profile", "Orders" and "Logout" options
             if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']==true && $_SESSION['access_level']=='Customer'){
             ?>
             <ul class="nav navbar-nav navbar-right">
