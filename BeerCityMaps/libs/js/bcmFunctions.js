@@ -1,6 +1,5 @@
 $('document').ready(function() {
   zipcodeAPI();
-  mapsAPI();
 }); // end document ready
 
 // zip code api
@@ -62,10 +61,3 @@ console.log(container);
 }
 }).trigger("change");
 }
-
-// maps
-function mapsAPI(){
-  console.log("stuff");
-
-  
-    }

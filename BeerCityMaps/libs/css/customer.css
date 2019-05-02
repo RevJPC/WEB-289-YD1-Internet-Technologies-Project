@@ -48,10 +48,16 @@ div#blueimp-gallery div.modal{ overflow: visible; }
 
 .account-wall{
   margin-top: 40px;
-  padding: 40px 0px 20px 0px;
+  padding: 10px 0px 20px 0px;
   background-color: #ffffff;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
 }
+
+.account-wall h2 {
+  text-align: center;
+  display: block;
+}
+
 
 .login-title{
   color: #555;
@@ -96,8 +102,13 @@ div#blueimp-gallery div.modal{ overflow: visible; }
 }
 
 #map {
-  height: 600px;  /* map height is 600 pixels */
-  width: 100%;  /* The width is the width of the web page */
+ width: 100vw;
+ height: 80vh;
+ position: relative;
+ margin-left: -50vw;
+ margin-top: 0;
+ padding-top: 0;
+ left: 50%;
 }
 
 .sm-logo {
@@ -105,14 +116,25 @@ div#blueimp-gallery div.modal{ overflow: visible; }
 }
 
 #city, #state {
-  opacity: .2;
 }
 
 footer {
-  border: 1px solid black;
-  position: fixed;
-  bottom: 10px;
-  width: 100%;
+
+}
+
+#about {
+}
+
+#about p {
+    color: red;
+
   text-align: center;
-  height: 70px;
+
+}
+
+#markerimage {
+  float: left;
+  padding: 5px;
+  float: top;
+  height: 50px;
 }

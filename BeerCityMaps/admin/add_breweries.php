@@ -29,11 +29,6 @@ if($_POST){
 
 move_uploaded_file($_FILES['logo']['tmp_name'], "../images/". $_FILES['logo']['name']);
 
-
-
-
-
- 
     // get database connection
     $database = new Database();
     $db = $database->getConnection();
@@ -60,91 +55,79 @@ move_uploaded_file($_FILES['logo']['tmp_name'], "../images/". $_FILES['logo']['n
       if($brewery->create())
     // empty posted values
         $_POST=array();
+      header("Location: {$home_url}admin/read_breweries.php?action=logged_in_as_admin");
     }
     
 
 ?>
-<form action='add_breweries.php' method='post' enctype="multipart/form-data" id='register'>
+<form action='add_breweries.php' method='post' enctype="multipart/form-data" id='add_breweries'>
   <table class='table table-responsive'>
 
     <tr>
       <td class='width-30-percent'>Name</td>
-      <td><input type='text' name='name' class='form-control' required value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES) : "";  ?>" /></td>
+      <td><input type='text' name='name' class='form-control' placeholder="Brewery name" required value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES) : "";  ?>"></td>
     </tr>
     <tr>
       <td class='width-30-percent'>Link</td>
-      <td><input type='text' name='link' class='form-control' required value="<?php echo isset($_POST['link']) ? htmlspecialchars($_POST['link'], ENT_QUOTES) : "";  ?>" /></td>
+      <td><input type='url' name='link' class='form-control' required placeholder="https://brewery.com" value="<?php echo isset($_POST['link']) ? htmlspecialchars($_POST['link'], ENT_QUOTES) : "";  ?>"></td>
     </tr>
     <tr>
       <td class='width-30-percent'>Email</td>
-      <td><input type='text' name='email' class='form-control' required value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES) : "";  ?>" /></td>
+      <td><input type='email' name='email' class='form-control' placeholder="email@address.com" required value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES) : "";  ?>"></td>
     </tr>
     <tr>
       <td class='width-30-percent'>Contact Number</td>
-      <td><input type='text' name='contact_number' class='form-control' required value="<?php echo isset($_POST['contact_number']) ? htmlspecialchars($_POST['contact_number'], ENT_QUOTES) : "";  ?>" /></td>
+      <td><input type='tel' pattern="[0-9]{10}" oninvalid="setCustomValidity('Please enter in 8285551212 format')" name='contact_number' class='form-control' placeholder="8285551212" required value="<?php echo isset($_POST['contact_number']) ? htmlspecialchars($_POST['contact_number'], ENT_QUOTES) : "";  ?>"></td>
     </tr>
     <tr>
       <td class='width-30-percent'>Address</td>
-      <td><input type='text' name='address' class='form-control' required value="<?php echo isset($_POST['address']) ? htmlspecialchars($_POST['address'], ENT_QUOTES) : "";  ?>" /></td>
+      <td><input type='text' name='address' class='form-control' placeholder="123 Brewery Ave" required value="<?php echo isset($_POST['address']) ? htmlspecialchars($_POST['address'], ENT_QUOTES) : "";  ?>"></td>
     </tr>
+          <!-- CITY STATE ZIP -->
+          <tr>
+            <td>Zip Code *</td>
+            <td><input type="text" name="zipcode" id="zipcode" class="form-control" placeholder="12345678" required value="<?php echo isset($_POST['city']) ? htmlspecialchars($_POST['zipcode'], ENT_QUOTES) : "";  ?>"></td>
+          </tr>
+          <tr>
+            <td>City *</td>
+            <td><input type="text" id="city" name="city" class="form-control" tabindex=-1 placeholder="City will automaticlly populate from Zip Code" required value="<?php echo isset($_POST['city']) ? htmlspecialchars($_POST['city'], ENT_QUOTES) : "";  ?>"></td>
+          </tr>
+          <tr>
+            <td>State *</td>
+            <td><input type="text" name="state" id="state" class="form-control" tabindex=-1 placeholder="State will automaticlly populate from Zip Code" required value="<?php echo isset($_POST['state']) ? htmlspecialchars($_POST['state'], ENT_QUOTES) : "";  ?>"></td>
+            </tr>
+            <!-- END CITY STATE ZIP -->
     <tr>
-      <td class='width-30-percent'>City</td>
-      <td><input type='text' name='city' class='form-control' required value="<?php echo isset($_POST['city']) ? htmlspecialchars($_POST['city'], ENT_QUOTES) : "";  ?>" /></td>
-    </tr>
-    <tr>
-      <td class='width-30-percent'>State</td>
-      <td><input type='text' name='state' class='form-control' required value="<?php echo isset($_POST['state']) ? htmlspecialchars($_POST['state'], ENT_QUOTES) : "";  ?>" /></td>
-    </tr>
-    <tr>
-      <td class='width-30-percent'>Zip</td>
-      <td><input type='text' name='zip' class='form-control' required value="<?php echo isset($_POST['zip']) ? htmlspecialchars($_POST['zip'], ENT_QUOTES) : "";  ?>" /></td>
+      <td class='width-30-percent'>Description</td>
+      <td><input type='text' name='description' class='form-control' placeholder="This is Text that will show up in BOLD" required value="<?php echo isset($_POST['description']) ? htmlspecialchars($_POST['description'], ENT_QUOTES) : "";  ?>"></td>
     </tr>
     <tr>
       <td class='width-30-percent'>Ad Text</td>
-      <td><input type='text' name='ad_text' class='form-control' required value="<?php echo isset($_POST['ad_text']) ? htmlspecialchars($_POST['ad_text'], ENT_QUOTES) : "";  ?>" /></td>
-    </tr>
-    <tr>
-      <td class='width-30-percent'>Description</td>
-      <td><input type='text' name='description' class='form-control' required value="<?php echo isset($_POST['description']) ? htmlspecialchars($_POST['description'], ENT_QUOTES) : "";  ?>" /></td>
+      <td><input type='text' name='ad_text' class='form-control' placeholder="This is Text that will show up under the description" required value="<?php echo isset($_POST['ad_text']) ? htmlspecialchars($_POST['ad_text'], ENT_QUOTES) : "";  ?>"></td>
     </tr>
     <tr>
       <td class='width-30-percent'>Latitude</td>
-      <td><input type='text' name='lat' class='form-control' required value="<?php echo isset($_POST['lat']) ? htmlspecialchars($_POST['lat'], ENT_QUOTES) : "";  ?>" /></td>
+      <td><input type='text' name='lat' class='form-control' required value="<?php echo isset($_POST['lat']) ? htmlspecialchars($_POST['lat'], ENT_QUOTES) : "";  ?>"></td>
     </tr>
     <tr>
       <td class='width-30-percent'>Longitude</td>
-      <td><input type='text' name='lng' class='form-control' required value="<?php echo isset($_POST['lng']) ? htmlspecialchars($_POST['lng'], ENT_QUOTES) : "";  ?>" /></td>
+      <td><input type='text' name='lng' class='form-control' required value="<?php echo isset($_POST['lng']) ? htmlspecialchars($_POST['lng'], ENT_QUOTES) : "";  ?>"></td>
     </tr>
 
-    <!-- LOGO UPLOAD -->
-
-
-
-
-<?php
-
-
-
-
-
-?>
-
-<tr>
-  <td class="width-30-percent">Logo</td>
-  <td><input type="file" name='logo' class='form-control'></td>
-<td></td>
-</tr>
-
-
-
-
+<!-- LOGO UPLOAD -->
+    <tr>
+      <td class="width-30-percent">Logo</td>
+      <td><input type="file" name='logo' class='form-control'></td>
+      <td></td>
+    </tr>
+    <td>
     <td>
       <button type="submit" class="btn btn-primary">
       <span class="glyphicon glyphicon-plus"></span> Register</button>
     </td>
     </tr>
-  </table>
-</form>
+    </table>
+    </form>
 <?php
  
 echo "</div>";

@@ -15,7 +15,7 @@ $database = new Database();
 $db = $database->getConnection();
  
 // initialize objects
-$user = new Brewery($db);
+$brewery = new Brewery($db);
  
  
 // include page header HTML
@@ -24,13 +24,13 @@ include_once "layout_head.php";
 echo "<div class='col-md-12'>";
  
     // read all breweries from the database
-    $stmt = $user->readAll($from_record_num, $records_per_page);
+    $stmt = $brewery->readAll($from_record_num, $records_per_page);
  
     // count retrieved breweries
     $num = $stmt->rowCount();
  
     // to identify page for paging
-    $page_url="breweries.php?";
+    $page_url="list.php?";
  
     // include breweries template
     include_once "breweries_template.php";

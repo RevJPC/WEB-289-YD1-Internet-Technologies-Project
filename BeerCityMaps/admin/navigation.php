@@ -23,6 +23,9 @@
       <li <?php echo $page_title=="Add Breweries" ? "class='active'" : ""; ?>>
         <a href="<?php echo $home_url; ?>admin/add_breweries.php">Add Breweries</a>
       </li>
+      <li <?php echo $page_title=="Map" ? "class='active'" : ""; ?>>
+        <a href="<?php echo $home_url; ?>admin/map.php">Map</a>
+      </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li>

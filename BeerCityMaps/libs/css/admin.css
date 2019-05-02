@@ -41,3 +41,7 @@
 .delete-pdf{ margin-left:.5em; }
 .delete-pdf img{ width:20px; cursor:pointer; }
 .pdf-item{ padding:0 0 1em 0; }
+
+#admin {
+    color: red;
+}

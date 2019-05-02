@@ -9,10 +9,13 @@ session_start();
 date_default_timezone_set('America/New_York');
  
 // images forlder
-$image_dir="/images/";
+$image_dir="http://localhost/images/";
 
 // home page url
 $home_url="http://localhost/";
+
+// about page url
+$about_url="http://localhost/about.php";
 
 // map page url
 $map_url="http://localhost/map.php";

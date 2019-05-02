@@ -9,6 +9,7 @@ class User{
     public $id;
     public $firstname;
     public $lastname;
+    public $birthday;
     public $email;
     public $contact_number;
     public $address;
@@ -30,7 +31,7 @@ class User{
 function emailExists(){
  
     // query to check if email exists
-    $query = "SELECT id, firstname, lastname, access_level, password, status
+    $query = "SELECT id, email, firstname, lastname, birthday, access_level, password, status
             FROM " . $this->table_name . "
             WHERE email = ?
             LIMIT 0,1";
@@ -50,7 +51,7 @@ function emailExists(){
     // get number of rows
     $num = $stmt->rowCount();
  
-    // if email exists, assign values to object properties for easy access and use for php sessions
+    // if email exists, assign values to object
     if($num>0){
  
         // get record details / values
@@ -58,8 +59,10 @@ function emailExists(){
  
         // assign values to object properties
         $this->id = $row['id'];
+        $this->email = $row['email'];
         $this->firstname = $row['firstname'];
         $this->lastname = $row['lastname'];
+        $this->birthday = $row['birthday'];
         $this->access_level = $row['access_level'];
         $this->password = $row['password'];
         $this->status = $row['status'];
@@ -82,6 +85,7 @@ function create(){
             SET
         firstname = :firstname,
         lastname = :lastname,
+        birthday = :birthday,
         email = :email,
         contact_number = :contact_number,
         address = :address,
@@ -100,6 +104,7 @@ function create(){
     // sanitize
     $this->firstname=htmlspecialchars(strip_tags($this->firstname));
     $this->lastname=htmlspecialchars(strip_tags($this->lastname));
+    $this->birthday=htmlspecialchars(strip_tags($this->birthday));
     $this->email=htmlspecialchars(strip_tags($this->email));
     $this->contact_number=htmlspecialchars(strip_tags($this->contact_number));
     $this->address=htmlspecialchars(strip_tags($this->address));
@@ -115,6 +120,7 @@ function create(){
     $stmt->bindParam(':firstname', $this->firstname);
     $stmt->bindParam(':lastname', $this->lastname);
     $stmt->bindParam(':email', $this->email);
+    $stmt->bindParam(':birthday', $this->birthday);
     $stmt->bindParam(':contact_number', $this->contact_number);
     $stmt->bindParam(':address', $this->address);
     $stmt->bindParam(':city', $this->address);
@@ -153,6 +159,7 @@ function readAll($from_record_num, $records_per_page){
                 id,
                 firstname,
                 lastname,
+                birthday,
                 email,
                 contact_number,
                 access_level,

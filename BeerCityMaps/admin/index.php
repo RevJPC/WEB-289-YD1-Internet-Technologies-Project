@@ -11,7 +11,6 @@ $page_title="Admin Index";
 // include page header HTML
 include 'layout_head.php';
  
-    echo "<div class='col-md-12'>";
  
         // get parameter values, and to prevent undefined index notice
         $action = isset($_GET['action']) ? $_GET['action'] : "";
@@ -29,11 +28,8 @@ include 'layout_head.php';
             echo "</div>";
         }
  
-        echo "<div class='alert alert-info'>";
-            echo "Contents of your admin section will be here.";
-        echo "</div>";
+        include_once('read_users.php');
  
-    echo "</div>";
  
 // include page footer HTML
 include_once 'layout_foot.php';

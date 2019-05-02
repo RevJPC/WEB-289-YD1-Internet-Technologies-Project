@@ -1,17 +1,12 @@
+</div>
+<!--container-->
 
-<footer>
-
-
+<footer class="footer navbar-fixed-bottom">
+  <div class="navbar-wrapper navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+      <p class="navbar-text pull-left">&copy;  2019 by <a href="https://www.revjpc.com" target="_blank">RevJPC</a> All rights reserved.</p>
+    </div>
+  </div>
 </footer>
-
-
-    <!-- /container -->
- 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
-<!-- Bootstrap JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- 
-<!-- end HTML page -->
 </body>
 </html>

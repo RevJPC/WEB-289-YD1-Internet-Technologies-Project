@@ -30,7 +30,7 @@ if($num>0){
   echo "</table>";
 
   $page_url="breweries_template.php?";
-  $total_rows = $user->countAll();
+  $total_rows = $brewery->countAll();
 
 }
 

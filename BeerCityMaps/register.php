@@ -41,9 +41,12 @@ if($_POST){
       // set values to object properties
       $user->firstname=$_POST['firstname'];
       $user->lastname=$_POST['lastname'];
+      $user->birthday=$_POST['birthday'];
       $user->contact_number=$_POST['contact_number'];
       $user->address=$_POST['address'];
       $user->city=$_POST['city'];
+      $user->state=$_POST['state'];
+      $user->zipcode=$_POST['zipcode'];
       $user->password=$_POST['password'];
       $user->access_level='Customer';
       $user->status=0;
@@ -75,74 +78,68 @@ if($user->create()){
     $_POST=array();
  
 }else{
-    echo "<div class='alert alert-danger' role='alert'>Unable to register. Please try again.</div>";
-}
-    }
-}
+  echo "<div class='alert alert-danger' role='alert'>Unable to register. Please try again.</div>";
+}}}
 ?>
-<form action='register.php' method='post' id='register'>
-     <table class='table table-responsive'>
-         <tr>
-            <td class='width-30-percent'>First Name</td>
-            <td><input type='text' name='firstname' class='form-control' required value="<?php echo isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname'], ENT_QUOTES) : "";  ?>" /></td>
-        </tr>
-         <tr>
-            <td>Last Name</td>
-            <td><input type='text' name='lastname' class='form-control' required value="<?php echo isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname'], ENT_QUOTES) : "";  ?>" /></td>
-        </tr>
- 
-        <tr>
+<!-- REGISTRATION FORM -->
+<div class='col-sm-6 col-md-4 col-md-offset-4'>
+  <div class='account-wall'><h2>BeerCityMaps Registration!</h2>
+    <div id='my-tab-content' class='tab-content'>
+      <div class='tab-pane active' id='register'>
+      <form action='register.php' method='post' id='register'>
+        <table class='table table-responsive'>
+          <tr>
+            <td class='width-30-percent'>First Name *</td>
+            <td><input type='text' name='firstname' class='form-control' placeholder='First' required value="<?php echo isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname'], ENT_QUOTES) : "";  ?>"></td>
+          </tr>
+          <tr>
+            <td>Last Name *</td>
+            <td><input type='text' name='lastname' class='form-control' placeholder='Last' required value="<?php echo isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname'], ENT_QUOTES) : "";  ?>"></td>
+          </tr>
+          <tr>
+            <td>Birthday *</td>
+            <td><input type='date' name='birthday' id='birthday' max="<?php $d=strtotime("-21 Years"); echo date('Y-m-d', $d) ?>" oninvalid="setCustomValidity('Must be 21 years or older')" class='form-control' required value='' /></td>
+          </tr>
+          <tr>
             <td>Contact Number</td>
-            <td><input type='text' name='contact_number' class='form-control' required value="<?php echo isset($_POST['contact_number']) ? htmlspecialchars($_POST['contact_number'], ENT_QUOTES) : "";  ?>" /></td>
-        </tr>
- 
-        <tr>
+            <td><input type='tel' pattern='[0-9]{10}' oninvalid="setCustomValidity('Please enter in 8285551212 format')" name='contact_number' placeholder='8285551212' class='form-control' value="<?php echo isset($_POST['contact_number']) ? htmlspecialchars($_POST['contact_number'], ENT_QUOTES) : "";  ?>"></td>
+          </tr>
+
+          <tr>
             <td>Address</td>
-            <td><input type="text" name='address' class='form-control' required><?php echo isset($_POST['address']) ? htmlspecialchars($_POST['address'], ENT_QUOTES) : "";  ?></text></td>
-        </tr>
-
-        <!-- CITY STATE ZIP -->
-
-        <tr>
-          <td>City</td>
-          <td><input type="text" id="city" name="city" class="form-control" tabindex=-1 value="City will automaticlly populate from Zip Code" required value="<?php echo isset($_POST['city']) ? htmlspecialchars($_POST['city'], ENT_QUOTES) : "";  ?>" /></td>
-        </tr>
-
-        <tr>
-          <td>State</td>
-          <td><input type="text" name="state" id="state" class="form-control" tabindex=-1 value="State will automaticlly populate from Zip Code" required value="<?php echo isset($_POST['state']) ? htmlspecialchars($_POST['state'], ENT_QUOTES) : "";  ?>" /></td>
-        </tr>
-        <tr>
-          <td>Zip Code</td>
-          <td><input type="text" name="zipcode" id="zipcode" class="form-control" required value="<?php echo isset($_POST['city']) ? htmlspecialchars($_POST['zipcode'], ENT_QUOTES) : "";  ?>" /></td>
-        </tr>
-
-        <!-- END CITY STATE ZIP -->
-
-        <tr>
-            <td>Email</td>
-            <td><input type='email' name='email' class='form-control' required value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES) : "";  ?>" /></td>
-        </tr>
- 
-        <tr>
-            <td>Password</td>
-            <td><input type='password' name='password' class='form-control' required id='passwordInput'></td>
-        </tr>
- 
-        <tr>
-            <td></td>
-            <td>
-                <button type="submit" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-plus"></span> Register
-                </button>
-            </td>
-        </tr>
-    </table>
-</form>
-<?php
- 
-echo "</div>";
- 
-// include page footer HTML
-include_once "layout_foot.php";
-?>
+            <td><input type='text' name='address' class='form-control' placeholder='Address' value="<?php echo isset($_POST['address']) ? htmlspecialchars($_POST['address'], ENT_QUOTES) : '';  ?>"></td>
+          </tr>
+          <!-- CITY STATE ZIP -->
+          <tr>
+            <td>Zip Code *</td>
+            <td><input type="text" name="zipcode" id="zipcode" class="form-control" required value="<?php echo isset($_POST['city']) ? htmlspecialchars($_POST['zipcode'], ENT_QUOTES) : "";  ?>"></td>
+          </tr>
+          <tr>
+            <td>City *</td>
+            <td><input type="text" id="city" name="city" class="form-control" tabindex=-1 placeholder="City will automaticlly populate from Zip Code" required value="<?php echo isset($_POST['city']) ? htmlspecialchars($_POST['city'], ENT_QUOTES) : "";  ?>"></td>
+          </tr>
+          <tr>
+            <td>State *</td>
+            <td><input type="text" name="state" id="state" class="form-control" tabindex=-1 placeholder="State will automaticlly populate from Zip Code" required value="<?php echo isset($_POST['state']) ? htmlspecialchars($_POST['state'], ENT_QUOTES) : "";  ?>"></td>
+            </tr>
+            <!-- END CITY STATE ZIP -->
+            <tr>
+              <td>Email *</td>
+              <td><input type='email' name='email' class='form-control' required value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES) : "";  ?>"></td>
+            </tr>
+            <tr>
+              <td>Password *</td>
+              <td><input type='password' name='password' class='form-control' required id='passwordInput'></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Register</button>
+              </td>
+            </tr>
+          </table>
+          </form>
+  </div>
+</div>
+</div>
+<?php include_once "layout_foot.php"; ?>

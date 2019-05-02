@@ -1,16 +1,15 @@
 <?php
 
 // core configuration
-include_once "config/core.php";
+include_once "../config/core.php";
 $page_title="Map";
  
 // include login checker
-$require_login=true;
 include_once "login_checker.php";
 
 // include classes
-include_once 'config/database.php';
-include_once 'objects/brewery.php';
+include_once '../config/database.php';
+include_once '../objects/brewery.php';
 
 // include page header HTML
 include_once 'layout_head.php';
@@ -68,25 +67,6 @@ include_once 'layout_head.php';
 
         infoWindow = new google.maps.InfoWindow;
 
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('<?php echo $_SESSION['firstname']; ?> <br>You are here!');
-            infoWindow.open(map);
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
 
 // pull brewery information from the database
 <?php
@@ -107,7 +87,7 @@ $directions=null;
 // loop through the brewery records
   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
     extract($row);
-    echo("addMarker({$lat}, {$lng}, '<img id=markerimage src=images/{$logo}><h6>{$name}</h6><br><strong>{$description}</strong><br>{$ad_text}<br><a href={$link} target=_blank>{$link}</a><br><button onclick=calculateAndDisplayRoute(marker, i) >Directions</button>');\n");
+    echo("addMarker({$lat}, {$lng}, '<img id=markerimage src=../images/{$logo}><h6>{$name}</h6><br><strong>{$description}</strong><br>{$ad_text}<br><a href={$link} target=_blank>{$link}</a><br><button onclick=calculateAndDisplayRoute(marker, i) >Directions</button>');\n");
   }
 
 

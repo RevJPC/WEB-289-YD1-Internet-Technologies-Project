@@ -19,9 +19,9 @@ echo "<div class='col-md-12'>";
  
     // if login was successful
     if($action=='login_success'){
-        echo "<div class='alert alert-info'>";
-            echo "<strong>Hi " . $_SESSION['firstname'] . ", welcome back!</strong>";
-        echo "</div>";
+        echo "<div class='alert alert-info'>
+        <strong>Hi " . $_SESSION['firstname'] . ", welcome back!</strong>
+        </div>";
     }
  
     // if user is already logged in, shown when user tries to access the login page
@@ -30,11 +30,12 @@ echo "<div class='col-md-12'>";
             echo "<strong>You are already logged in.</strong>";
         echo "</div>";
     }
- 
-    // content once logged in
-    include_once "map.php";
- 
- 
+    
+echo "</div>";
+
+// content once logged in
+include_once "map.php";
+
 // footer HTML and JavaScript codes
 include 'layout_foot.php';
 ?>

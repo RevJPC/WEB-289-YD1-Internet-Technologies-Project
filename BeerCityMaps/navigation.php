@@ -11,7 +11,7 @@
             <span class="icon-bar"></span>
             </button>
  
-            <a class="navbar-brand" href="<?php echo $home_url; ?>">BeerCityMaps!</a>
+            <a class="navbar-brand" href="<?php echo $map_url; ?>">BeerCityMaps!</a>
         </div>
  
         <div class="navbar-collapse collapse">
@@ -60,10 +60,6 @@
             </ul>
             <?php
             }
-
-
-
-
 
             // login and logout options will be here 
             ?>

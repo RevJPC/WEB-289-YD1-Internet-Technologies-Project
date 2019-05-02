@@ -18,7 +18,7 @@ $user = new Brewery($db);
  
  
 // include page header HTML
-include_once "../layout_head.php";
+include_once "layout_head.php";
  
 echo "<div class='col-md-12'>";
  

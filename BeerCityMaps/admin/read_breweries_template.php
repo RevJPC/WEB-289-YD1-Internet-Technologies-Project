@@ -16,15 +16,11 @@ if($num>0){
     extract($row);
 
     // display brewery details
-    echo "<tr>";
-
-
-    echo "<td><img src='$image_dir/{$logo}' height=75px></td>";
-
-
-    echo "<td><a href=http://{$link} target='_blank'>{$name}</a><p>{$address}<br>{$city}, {$state} {$zip}<br>{$contact_number}</p></td>";
-    echo "<td>{$name}</td>";
-    echo "</tr>";
+    echo "<tr>
+          <td><img src='$image_dir/{$logo}' height=75px></td>
+          <td><a href={$link} target='_blank'>{$name}</a><p>{$address}<br>{$city}, {$state} {$zip}<br>{$contact_number}</p></td>
+          <td>{$name}</td>
+          </tr>";
   }
 
   echo "</table>";
@@ -32,7 +28,7 @@ if($num>0){
   $page_url="read_breweries.php?";
   $total_rows = $user->countAll();
 
-  include_once 'admin/paging.php';
+  include_once 'paging.php';
 }
 
 else{
